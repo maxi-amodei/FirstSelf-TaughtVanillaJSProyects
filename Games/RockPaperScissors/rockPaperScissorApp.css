@@ -7,24 +7,28 @@ body {
 
 #container {
 	background-color: #8AA2A9;
+	border:solid white;
+	border-radius: 30px;
 	width: 800px;
 	height: 500px;
-	margin: auto;
-	padding: 10px 0;
+	margin: 30px auto;
+	padding: 10px 0px;
+
 }
+
 h1 {
 	letter-spacing: 5px;
 	text-transform: uppercase;
 	font-weight: lighter;
-	text-align:center;
+	text-align: center;
 	font-size: 35px;
 	text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3); 
 
 }
 div {
 	font-size: 40px;
-	font-weight:lighter;
-	text-align:center;
+	font-weight: lighter;
+	text-align: center;
 	margin-bottom: 25px;
 	margin-top: 45px;
 	letter-spacing: 5px;
@@ -57,8 +61,8 @@ span {
 
 .legend,#alert {
 	font-size: 40px;
-	letter-spacing:5px;
 	margin-top: 15px;
+	letter-spacing:5px;
 	text-transform: uppercase;
 }
 
@@ -82,7 +86,6 @@ button{
 }
 
 button:hover{
-	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.7);
 	cursor:pointer;
-	 
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.7); 
 }

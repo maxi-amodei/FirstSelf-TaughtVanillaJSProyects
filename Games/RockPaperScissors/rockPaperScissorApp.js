@@ -20,13 +20,60 @@ function randomPlay(play){
 	let random = Math.floor(Math.random()*gameArray.length);
 	let compPlay = gameArray[random];
 	let competition = play.concat(compPlay);
-	gamePoints(competition);
-	console.log('computer:',compPlay);
+	gamePoints(competition,play,compPlay);
 }
+
+// 'You win! 👊 destroys ✌', '-win'
+// 'You win! 🖐 covers 👊', '-win'
+// 'You win! ✌ cut 🖐', '-win'
+// 'One point each, 👊 hits 👊 ' ,''
+// 'One point each, 🖐 hits 🖐',''
+// 'One point each, ✌ hit ✌',''
+// 'You lose, 👊 destroys ✌', '-lose'
+// 'You lose, 🖐 covers 👊', '-lose'
+// 'You lose, ✌ cut 🖐', '-lose'
+function gamePoints(comp,userCh,compCh){
+	console.log(comp);
+	const userSub ="user".fontsize(3).sub();
+	const compSub ="comp".fontsize(3).sub();;
+	if(comp === 'RS'||comp === 'PR' ||comp === 'SP'){
+		countUser +=1;
+		displayLegend( `${convertToSymbol(userCh)}${userSub} destroys ${convertToSymbol(compCh)}${compSub} You win!`, '-win');
+		displayPoints(countUser,countComputer);
+	} else if(comp === 'RR'||comp === 'PP' ||comp === 'SS'){
+		countUser +=1;
+		countComputer +=1;
+		
+		displayLegend(`${convertToSymbol(userCh)}${userSub} hits ${convertToSymbol(compCh)}${compSub} One point each!`,'');
+		displayPoints(countUser,countComputer);
+	} else {
+		countComputer+=1;
+		displayPoints(countUser,countComputer);
+		displayLegend( `${convertToSymbol(userCh)}${userSub} is destroyed by ${convertToSymbol(compCh)}${compSub} You lose!`, '-lose');
+	}
+	
+
+	console.log('user points:',countUser);
+	console.log('computer points:',countComputer);
+	console.log(legend);
+	console.log(convertToSymbol(userCh),convertToSymbol(compCh));
+}
+
+
+function convertToSymbol(choice){
+	if(choice === 'R'){
+		return '👊';
+	} else if(choice === 'P'){
+		return '🖐';
+	} else {
+		return '✌';
+	}
+}
+
 
 function game(){
 	let userPlay = this.id;
-	console.log('user:',this.id);
+	// console.log('user:',this.id);
 	randomPlay(userPlay);
 
 	if(countUser === 10 && countComputer === 10 ){
@@ -49,64 +96,18 @@ function game(){
 	}
 }
 
-function gamePoints(comp){
-	
-	console.log(comp);
-	if(comp === 'RS'){
-		countUser +=1;
-		displayLegend('You win! 👊 destroys ✌', '-win');
-		displayPoints(countUser,countComputer);
-	} else if(comp === 'PR'){
-		countUser +=1;
-		displayLegend('You win! 🖐 covers 👊', '-win');
-		displayPoints(countUser,countComputer);
-	} else if(comp === 'SP'){
-		countUser +=1;
-		displayLegend('You win! ✌ cut 🖐', '-win');
-		displayPoints(countUser,countComputer);
-	} else if(comp === 'RR'){
-		countUser +=1;
-		countComputer +=1;
-		displayLegend('One point each, 👊 hits 👊 ' ,'');
-		displayPoints(countUser,countComputer);
-	} else if(comp === 'PP'){
-		countUser +=1;
-		countComputer +=1;
-		displayLegend('One point each, 🖐 hits 🖐','');
-		displayPoints(countUser,countComputer);
-	} else if(comp === 'SS'){
-		countUser +=1;
-		countComputer +=1;
-		displayLegend('One point each, ✌ hit ✌','');
-		displayPoints(countUser,countComputer);
-	} else {
-		countComputer+=1;
-		displayPoints(countUser,countComputer);
-		if(comp === 'SR') {
-		displayLegend('You lose, 👊 destroys ✌', '-lose');
-		}
-		if(comp === 'RP') {
-		displayLegend('You lose, 🖐 covers 👊', '-lose');
-		}
-		if(comp === 'PS') {
-		displayLegend('You lose, ✌ cut 🖐', '-lose');
-		}
-	}
-
-	console.log('user points:',countUser);
-	console.log('computer points:',countComputer);
-	console.log(legend);
-}
 
 function displayLegend(text, action) {
-  legend.textContent = text;
+  legend.innerHTML = text;
   legend.classList.add(`legend${action}`);
   // remove alert
   setTimeout(function () {
-    legend.textContent = "";
+    legend.innerHTML = "";
     legend.classList.remove(`legend${action}`);
   }, 2500);
 }
+
+
 function displayPoints(textUser,textComp) {
   userPoints.innerText = textUser;
   computerPoints.innerText = textComp; 
