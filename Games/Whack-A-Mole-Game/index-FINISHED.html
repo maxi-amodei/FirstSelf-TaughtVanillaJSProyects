@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Whack A Mole!</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Whack-a-mole! <span class="score">0</span></h1>
+  <form id="level">
+  <label >Choose difficulty:</label>
+  <select  id='options'name="level">
+    <option value="Beginner">Begginer</option>
+    <option value="Medium">Medium</option>
+    <option value="Expert">Expert</option>
+  </select>
+</form>
+  <button onClick="startGame()">Start!</button>
+
+  <h2 id="high-score">Highest Score:<span class="highest-score"></span></h2>
+
+  <div class="game">
+    <div class="hole hole1">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole2">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole3">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole4">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole5">
+      <div class="mole"></div>
+    </div>
+    <div class="hole hole6">
+      <div class="mole"></div>
+    </div>
+  </div>
+
+<script>
+  const holes = document.querySelectorAll('.hole');
+  const scoreBoard = document.querySelector('.score');
+  const moles = document.querySelectorAll('.mole');
+  const highScoreBoard = document.querySelector('.highest-score');
+  let lastHole;
+  // window.addEventListener("DOMContentLoaded",getLocalStorage);
+  let lastScore = getLocalStorage();
+  highScoreBoard.innerHTML = lastScore.value;
+  console.log(lastScore.value);
+  let timeUp = false;
+  let score = 0;
+
+
+  function randomTime(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
+
+  function randomHole(holes) {
+    const idx = Math.floor(Math.random() * holes.length);
+    const hole = holes[idx];
+    if (hole === lastHole) {
+      // console.log('Ah nah thats the same one bud');
+      return randomHole(holes);
+    }
+    lastHole = hole;
+    return hole;
+  }
+
+  function peep() {
+    let time;
+    switch (document.querySelector('#options').value) {
+  case 'Beginner':
+    time = randomTime(800, 1000);
+    break;
+  case 'Medium':
+    time = randomTime(200, 1000);
+    break;
+  case 'Expert':
+    time = randomTime(60, 600);
+    break;
+}
+    const hole = randomHole(holes);
+    hole.classList.add('up');
+    setTimeout(() => {
+      hole.classList.remove('up');
+      if (!timeUp) peep();
+    }, time);
+  }
+
+  function startGame() {
+    scoreBoard.textContent = 0;
+    timeUp = false;
+    score = 0;
+    peep();
+    setTimeout(() => { timeUp = true;
+       setRanking()}, 11000);
+   
+  }
+
+  function setRanking(){
+    console.log(score);
+     if(score > lastScore.value){
+    highScoreBoard.innerHTML = score;
+    addToLocalStorage(score);}
+   
+  }
+
+  function bonk(e) {
+    if(!e.isTrusted || timeUp === true) return; // cheater!
+    score++;
+    this.parentNode.classList.remove('up');
+    scoreBoard.textContent = score;
+  }
+
+  moles.forEach(mole => mole.addEventListener('click', bonk));
+
+  let levelOption=document.querySelector('#options').value;
+  
+ function addToLocalStorage(value) {
+  let highScore = { value: value };
+  console.log(highScore);
+  let highScoreStorage = getLocalStorage();
+  highScoreStorage = highScore;
+  localStorage.setItem("highScoreStorage", JSON.stringify(highScoreStorage));
+}
+
+function getLocalStorage() {
+  let highScoreStorage = localStorage.getItem("highScoreStorage");
+  if (highScoreStorage == null || highScoreStorage == "") {
+    highScoreStorage = { value: 0 };
+  } else {
+    highScoreStorage = JSON.parse(highScoreStorage);
+  }
+  return highScoreStorage;
+}
+
+</script>
+</body>
+</html>

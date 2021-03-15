@@ -1,0 +1,46 @@
+body {
+	font-family: helvetica;
+}
+
+h1,h2 {
+	font-weight: lighter;
+	text-align: center;
+}
+
+.inputs {
+	text-align: center;
+}
+
+input.newString {
+	background-color:#46A049;
+	color:#ffffff;
+	border-radius: 5px;
+	margin-top: 10px;
+	height: 30px;
+	width: 60px;
+}
+
+
+input.textInput {
+	width: 200px;
+}
+
+.result{
+	margin-top: 40px;
+}
+p.textResult {
+	text-align: center;
+	font-size: 120%;
+	padding-top: 15px;	
+	height:30px;
+	width: 170px;
+	background-color: #eeeeee; 
+	border: thin solid #CCCCCC;
+	margin: auto;
+	color:hsl(125, 65%, 39%);
+}
+
+h2 {
+	color:#46A049;
+}
+

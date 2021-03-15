@@ -1,0 +1,35 @@
+body {
+	font-family: helvetica;
+}
+
+h1,h2 {
+	font-weight: lighter;
+	text-align: center;
+}
+
+#inputs {
+	text-align: center;
+}
+
+
+
+input#newString {
+	background-color:#46A049;
+	color:#ffffff;
+	border-radius: 5px;
+	margin-top: 10px;
+	height: 30px;
+	width: 60px;
+}
+
+
+input#textInput {
+	width: 500px;
+}
+
+
+
+h2 {
+	color:#46A049;
+}
+
