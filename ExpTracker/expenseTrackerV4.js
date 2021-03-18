@@ -23,8 +23,6 @@ window.addEventListener("DOMContentLoaded", setupItems);
 
 function createExpense(){							
 	//esta funcion se encarga de guardar en localStorage el input del form Y LLAMAR A LA FUNCION QUE LA AÑADE AL DOM	
-	// debugger;
-	//e.preventDefault();
 	let key = new Date().getTime().toString();
 	let valueObj = {
 		expenseText:textInput.value,
