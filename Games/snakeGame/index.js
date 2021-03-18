@@ -53,7 +53,7 @@ window.addEventListener('keydown', function(e){
 function main(currentTime){
   if (gameOver){
     if (confirm('You lost. Press ok to restart')){
-      window.location = 'file:///C:/Users/maxi_/OneDrive/Web/MyFirstApps/snakeGame/snakeGame.html';
+      window.location.reload();
     }
     return
   }
