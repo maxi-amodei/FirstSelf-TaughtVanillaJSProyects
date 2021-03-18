@@ -34,8 +34,8 @@ function randomPlay(play) {
 // 'You lose, ✌ cut 🖐', '-lose'
 function gamePoints(comp, userCh, compCh) {
 	console.log(comp);
-	const userSub = "user".fontsize(3).sub();
-	const compSub = "comp".fontsize(3).sub();;
+	const userSub = "user".fontsize(2).sub();
+	const compSub = "comp".fontsize(2).sub();;
 	if (comp === 'RS' || comp === 'PR' || comp === 'SP') {
 		countUser += 1;
 		displayLegend(`${convertToSymbol(userCh)}${userSub} destroys ${convertToSymbol(compCh)}${compSub} You win!`, '-win');
@@ -104,7 +104,7 @@ function displayLegend(text, action) {
 	setTimeout(function () {
 		legend.innerHTML = "";
 		legend.classList.remove(`legend${action}`);
-	}, 2500);
+	}, 4500);
 }
 
 
